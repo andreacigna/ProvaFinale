@@ -19,7 +19,7 @@ fig = plt.figure(figsize=(12, 5))
 # Subplot per il grafico 3D
 ax3d = plt.subplot2grid((1, 2), (0, 0), projection='3d')
 scat = ax3d.scatter(X, Y, Z, c=valori_funzione, cmap='viridis')
-fig.colorbar(scat, ax=ax3d)
+fig.colorbar(scat, ax=ax3d, location='right', pad = 0.1)
 ax3d.set_xlabel('TPR')
 ax3d.set_ylabel('TNR')
 ax3d.set_zlabel('Prev')
