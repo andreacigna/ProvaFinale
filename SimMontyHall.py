@@ -4,32 +4,32 @@ import matplotlib.pyplot as plt
 
 np.random.seed(46) #per la riproducibilità dei risultati
 def monty_hall():
-    selected_door, winning_door = np.random.randint(low=1, high=4, size=2)
+    selectedDoor, winningDoor = np.random.randint(low=1, high=4, size=2)
 
     door_options = [1, 2, 3]
 
-    if selected_door == winning_door:
+    if selectedDoor == winningDoor:
         #se la scelta iniziale del concorrente è la porta con l'auto, il conduttore
         #sceglie in modo casuale dalle due porte rimanenti quale aprire, entrambi
         #contenenti una capra
-        door_options.remove(selected_door)
+        door_options.remove(selectedDoor)
         open_door = np.random.choice(door_options)
 
-        #La switching_door conterrà una capra
-        switching_door = [door for door in door_options if door != open_door][0]
+        #La switchingDoor conterrà una capra
+        switchingDoor = [door for door in door_options if door != open_door][0]
     else:
         #quando il concorrente sceglie inizialmente una porta con una capra,
         #il conduttore apre l'altra porta contenente la capra, lasciando
-        #l'auto dietro la switching_door
+        #l'auto dietro la switchingDoor
 
-        door_options.remove(selected_door)
-        door_options.remove(winning_door)
+        door_options.remove(selectedDoor)
+        door_options.remove(winningDoor)
         open_door = door_options[0]
 
-        switching_door = winning_door
+        switchingDoor = winningDoor
 
     # l'1 indica una vittoria dell'auto, 0 invece una sconfitta
-    if switching_door == winning_door:
+    if switchingDoor == winningDoor:
         switch = 1.
         non_switch = 0.
     else:
@@ -50,7 +50,7 @@ def simulate_monty_hall(simulations):
 
     return switching_results, not_switching_results
 
-switching_results, not_switching_results = simulate_monty_hall(10000)
+switching_results, not_switching_results = simulate_monty_hall(100)
 print('La percentuale di vincita quando si è cambiata scelta è del: {:.2f}%'.format(sum(switching_results) / len(switching_results) * 100))
 print('La percentuale di vincita quando non si è cambiata scelta è del: {:.2f}%'.format(sum(not_switching_results) / len(not_switching_results) * 100))
 
@@ -66,4 +66,5 @@ df.plot(ax=ax)
 ax.set_title("Percentuali di vittoria per ogni scelta")
 ax.set_ylabel("Percentuale di vittoria")
 ax.set_xlabel("Numero di simulazioni")
+#plt.savefig('/Users/andreacigna/Downloads/poche.svg')
 plt.show()
